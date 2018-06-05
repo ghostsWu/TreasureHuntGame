@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>金蛋</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, height=device-height">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link href="css/bacecss.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		
+
+		body,html{
+			width: 100%;height: 100%;
+
+		}
+		body{
+			/*max-width: 440px;*/
+			/*margin: 0 auto;*/
+		}
+
+		video{
+			/*display: none;*/
+		}
+
+		.videobox{
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+			overflow: hidden;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 1;
+		}
+
+		.titleimg{
+			/*display: none;*/
+			position: absolute;
+			width: 100%;
+			left: 0;
+			top: 0;
+
+		}
+
+		canvas{
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 1;
+		}
+
+		#butt{
+			position: absolute;
+			top: 40%;
+			left: 40%;
+			/*padding: 6px;*/
+			color: #fff;
+			z-index: 999;
+
+			width: 200px;
+			height: 200px;
+
+			
+
+		}
+
+		#butt{
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f5725b+0,ab4e3a+100 */
+			background: rgb(245,114,91); /* Old browsers */
+			background: -moz-linear-gradient(left,  rgba(245,114,91,1) 0%, rgba(171,78,58,1) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(left,  rgba(245,114,91,1) 0%,rgba(171,78,58,1) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to right,  rgba(245,114,91,1) 0%,rgba(171,78,58,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5725b', endColorstr='#ab4e3a',GradientType=1 ); /* IE6-9 */
+
+			/*padding: 3px;*/
+
+			border-radius: 50%;
+			/*box-sizing: border-box;*/
+		}
+
+
+		#butt:before{
+			display: block;
+			content: "";
+			position: absolute;
+			width: 90%;
+			height: 90%;
+			margin-top: 5%;
+			margin-left: 5%;
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ab4e3a+0,f5725b+100 */
+			background: rgb(171,78,58); /* Old browsers */
+			background: -moz-linear-gradient(45deg,  rgba(171,78,58,1) 0%, rgba(245,114,91,1) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(45deg,  rgba(171,78,58,1) 0%,rgba(245,114,91,1) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(45deg,  rgba(171,78,58,1) 0%,rgba(245,114,91,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ab4e3a', endColorstr='#f5725b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+			border-radius: 50%;
+
+			z-index: 998;
+
+		}
+
+		#butt h1{
+			position: relative;
+			z-index: 1000;
+		}
+
+
+	</style>
+</head>
+<body>
+<!-- <img id="titleimg" class="titleimg" src="images/paper-output.jpg" > -->
+<div id="butt">
+	<h1>你拿到一个金蛋</h1>
+</div>
+<div class="videobox">
+	<video 
+	id="video" 
+	preload="auto" 
+	playsinline 
+	type="video/mp4" 
+	src="video/video.mp4"
+	
+	x5-video-player-type='h5' 
+	x5-video-player-fullscreen='true'>
+	<!--   <source src="video/video.mp4" type="video/video.mp4">
+	  <source src="video/video.mp4" type="video/video.mp4"> -->
+	Your browser does not support the video tag.
+	</video>
+	<canvas id="canv"></canvas>
+</div>
+
+
+<script type="text/javascript">
+
+	document.querySelector("#butt").onclick = function(){
+		document.querySelector("#video").play();
+	}
+
+	var mp4 = { //视频参数预设
+
+		width: 			"1080", //视频宽度
+		height: 		"1920", //视频高度
+		frame: 			"25", // 视频帧数
+	}
+
+	console.log("视频尺寸为 " + mp4.width + "*" + mp4.height + " , " + mp4.frame );
+
+	var body_w = document.body.clientWidth;
+	var body_h = document.body.clientHeight;	
+	//获取屏幕可用尺寸
+
+
+	//对象获取
+	var vbox = document.querySelector("#video");
+
+	//设定播放尺寸
+	if ( body_w < body_h) {
+		//如果屏幕高度比例比视频高，则设置视频宽度为满屏，高度比例与视频一致;
+		vbox.style.width = body_w + "px";
+		vbox.style.height = parseInt(body_w * (mp4.height / mp4.width) ) + "px";
+
+		console.log("播放尺寸 " + body_w + "*" + parseInt(body_w * (mp4.height / mp4.width) ));
+
+	}else{
+		//横屏，则视频以屏幕高度为高，等比例居中;
+		vbox.style.height = body_h + "px";
+		vbox.style.width = parseInt(body_h * ( mp4.width / mp4.height) ) + "px";
+
+		vbox.style.position = "absolute";
+		vbox.style.left = "50%";
+		vbox.style.top = "0px";
+		vbox.style.marginLeft = 0 - (parseInt(body_h * ( mp4.width / mp4.height) ) / 2 ) + "px";
+
+		console.log("播放尺寸 " + body_h + "*" + parseInt(body_h * ( mp4.width / mp4.height)));
+
+	}
+
+
+	// var video = document.querySelector("#video");
+	// var c = document.querySelector("#canv");
+	// var ctx = c.getContext('2d');
+
+	// console.log( w + ","+ h );
+
+
+	// c.style.width = w +"px";
+	// c.style.height = (w * 1.7777) +"px";
+	// // c.style.width = "1080px";
+	// // c.style.height = "1920px";
+
+
+	// video.addEventListener('play', function() {
+	// 	var i = window.setInterval(function() {
+	// 		ctx.drawImage(video,0,0,(w * 1.7777),w)
+	// 		// ctx.drawImage(video,0,0,1920,1080)
+	// 	},25);
+	// },false);
+
+	// video.addEventListener('pause',function() {
+	// 	window.clearInterval(i);
+	// },false);
+
+	// video.addEventListener('ended',function() {
+	// 	clearInterval(i);
+	// },false);  
+
+	// document.getElementById('butt').onclick = function(){
+	// 	console.log("play");
+	// 	video.play();
+	// }
+	
+
+</script>
+
+
+</body>
+</html>

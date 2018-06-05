@@ -1,0 +1,30 @@
+body {
+  color: #fff;
+  background-color: #9e0d00;
+  background-image: url(../images/bg.jpg);
+}
+.wheel_game .user_inf {
+  display: none;
+}
+.myfriends {
+  display: none;
+}
+.wheel_title {
+  margin-bottom: -60px;
+  margin-top: 0;
+}
+.wheel_game {
+  padding-bottom: 30px;
+}
+.wheel_game li {
+  overflow: hidden;
+}
+.wheel_game .mychance {
+  color: #ddc589;
+}
+.activity_feedback .winning p {
+  color: #ddc589;
+}
+.activity_feedback .get_offer {
+  background-color: #b59640;
+}
